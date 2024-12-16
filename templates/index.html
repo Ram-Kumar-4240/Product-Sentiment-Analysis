@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Sentiment Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Product Sentiment Analysis</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Welcome to the Product Sentiment Analysis App</h2>
+            <p>Analyze product reviews and gain insights into customer sentiment.</p>
+        </section>
+
+        <section>
+            <!-- Example Form -->
+            <form method="POST" action="/analyze">
+                <label for="product-review">Enter Product Review:</label>
+                <textarea id="product-review" name="review" rows="4" cols="50" required></textarea>
+                <button type="submit">Analyze</button>
+            </form>
+        </section>
+
+        <section>
+            <!-- Conditional Rendering of Results -->
+            {% if sentiment %}
+                <h3>Sentiment Analysis Result:</h3>
+                <p>Sentiment: <strong>{{ sentiment }}</strong></p>
+                <p>Confidence: {{ confidence }}%</p>
+            {% elif error %}
+                <h3>Error:</h3>
+                <p>{{ error }}</p>
+            {% else %}
+                <p>Submit a review to analyze its sentiment.</p>
+            {% endif %}
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Product Sentiment Analysis. All rights reserved.</p>
+    </footer>
+</body>
+</html>
