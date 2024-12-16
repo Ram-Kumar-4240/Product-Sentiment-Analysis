@@ -1,4 +1,4 @@
-# sentiment analysis on amazon product reviews
+# Sentiment Analysis On Amazon Product Reviews
 
 It seems like you're in the process of training several models for sentiment analysis on a dataset of Amazon reviews. Here's a breakdown of what you've done so far:
 
