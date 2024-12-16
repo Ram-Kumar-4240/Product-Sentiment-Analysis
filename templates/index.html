@@ -9,47 +9,51 @@
 <body>
     <header>
         <h1>Product Sentiment Analysis</h1>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
-        </nav>
     </header>
 
     <main>
-        <section>
-            <h2>Welcome to the Product Sentiment Analysis App</h2>
-            <p>Analyze product reviews and gain insights into customer sentiment.</p>
+        <section class="intro">
+            <h2>Analyze Product Reviews</h2>
+            <p>Enter a product review to understand its sentiment.</p>
         </section>
 
-        <section>
-            <!-- Example Form -->
+        <section class="analysis-form">
             <form method="POST" action="/analyze">
                 <label for="product-review">Enter Product Review:</label>
-                <textarea id="product-review" name="review" rows="4" cols="50" required></textarea>
-                <button type="submit">Analyze</button>
+                <textarea id="product-review" name="review" rows="4" required placeholder="Type your product review here..."></textarea>
+                <button type="submit">Analyze Sentiment</button>
             </form>
         </section>
 
-        <section>
-            <!-- Conditional Rendering of Results -->
+        <section class="results">
             {% if sentiment %}
-                <h3>Sentiment Analysis Result:</h3>
-                <p>Sentiment: <strong>{{ sentiment }}</strong></p>
-                <p>Confidence: {{ confidence }}%</p>
+                <div class="result-container">
+                    <h3>Sentiment Analysis Result:</h3>
+                    <p><strong>Review:</strong> {{ review }}</p>
+                    <p><strong>Sentiment:</strong> 
+                        <span class="sentiment-{{ sentiment.lower() }}">{{ sentiment }}</span>
+                    </p>
+                    
+                    {% if probabilities %}
+                    <div class="probability-details">
+                        <h4>Probability Breakdown:</h4>
+                        <p>Negative: {{ probabilities[0]|round(4) }}</p>
+                        <p>Neutral: {{ probabilities[1]|round(4) }}</p>
+                        <p>Positive: {{ probabilities[2]|round(4) }}</p>
+                    </div>
+                    {% endif %}
+                </div>
             {% elif error %}
-                <h3>Error:</h3>
-                <p>{{ error }}</p>
-            {% else %}
-                <p>Submit a review to analyze its sentiment.</p>
+                <div class="error-container">
+                    <h3>Error:</h3>
+                    <p>{{ error }}</p>
+                </div>
             {% endif %}
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Product Sentiment Analysis. All rights reserved.</p>
+        <p>&copy; 2024 Product Sentiment Analysis</p>
     </footer>
 </body>
 </html>
